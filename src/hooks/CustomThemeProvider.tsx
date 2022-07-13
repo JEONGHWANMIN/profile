@@ -2,7 +2,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 import { themeState } from '../lib/atom/atom';
-import { theme } from '../styles/theme/theme';
+import theme from '../styles/theme/theme';
 
 interface propsType {
   children: React.ReactNode;
