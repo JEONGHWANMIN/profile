@@ -1,7 +1,13 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, DefaultTheme } from 'styled-components';
 import reset from 'styled-reset';
 
-const GlobalStyle = createGlobalStyle`
+interface themeType {
+  bgColor: string;
+  textColor: string;
+  borderColor: string;
+}
+
+const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
   ${reset}
   html {
     font-size: 62.5%;
@@ -11,7 +17,8 @@ const GlobalStyle = createGlobalStyle`
   }
   body{
     background-color: ${({ theme }) => theme.bgColor};
-    color : ${({ theme }) => theme.textColor};
+    color : ${(props) => props.theme.textColor};
+    border-color:  ${({ theme }) => theme.borderColor};;
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
   a {
