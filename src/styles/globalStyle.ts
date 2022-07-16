@@ -65,6 +65,25 @@ const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
     width: 100%;
     height: 100%;
   }
+  @keyframes ratate {
+    0% {
+      transform: rotate(-50deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
 `;
 
 export default GlobalStyle;
