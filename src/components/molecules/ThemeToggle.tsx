@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BsFillMoonFill, BsSunFill, BsFillMoonStarsFill } from 'react-icons/bs';
+import { BsSunFill, BsFillMoonStarsFill } from 'react-icons/bs';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../../lib/atom/atom';
 
@@ -22,7 +22,6 @@ export function ThemeToggle() {
     <ToggleContainer onClick={() => setIsToggle(!istoggle)} toggle={istoggle}>
       <ToggleIcons>
         <BsSunFill />
-        {/* <BsFillMoonFill /> */}
         <BsFillMoonStarsFill />
       </ToggleIcons>
       <ToggleMove toggle={istoggle}></ToggleMove>
