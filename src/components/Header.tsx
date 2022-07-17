@@ -5,6 +5,7 @@ import { MdClose } from 'react-icons/md';
 import { themeState } from '../lib/atom/atom';
 import { useEffect, useState } from 'react';
 import { useScreenX } from '../hooks/useScreenX';
+import ThemeToggle from './molecules/ThemeToggle';
 
 interface propsType {
   theme: 'light' | 'dark';
@@ -26,11 +27,14 @@ function Header() {
         <LogoBox>
           <Logo>DevHwan</Logo>
         </LogoBox>
-        <NavMenu>
-          {MenuItem.map((text, i) => {
-            return <NavItem key={i}>{text}</NavItem>;
-          })}
-        </NavMenu>
+        <NavBox>
+          <NavMenu>
+            {MenuItem.map((text, i) => {
+              return <NavItem key={i}>{text}</NavItem>;
+            })}
+          </NavMenu>
+          <ThemeToggle />
+        </NavBox>
         <HamMenu onClick={() => setIsDrop(!isDrop)}>
           {isDrop ? (
             <IconGrop>
@@ -43,7 +47,7 @@ function Header() {
           )}
         </HamMenu>
       </HeaderConatiner>
-      <MobileNav isDrop={isDrop} className='slide'>
+      <MobileNav isDrop={isDrop} theme={curTheme} className='slide'>
         {MenuItem.map((text, i) => (
           <NavItem key={i} className='slide'>
             {text}
@@ -62,6 +66,9 @@ const Container = styled.div`
   .slide {
     animation: 0.3s linear slide;
   }
+  /* header box-shadow 속성 */
+  border-radius: 2px;
+  box-shadow: 0px 1px 10px #999;
 `;
 
 const HeaderConatiner = styled.header<propsType>`
@@ -72,7 +79,9 @@ const HeaderConatiner = styled.header<propsType>`
   padding: 0 5rem;
   width: 100%;
   height: 8rem;
-  background-color: var(--color-dark-3);
+  /* 테마에 따른 헤더 배경 색상  */
+  background-color: ${(props) =>
+    props.theme === 'light' ? 'var(--color-white-2)' : 'var(--color-dark-3);'};
 `;
 
 const LogoBox = styled.div`
@@ -81,7 +90,40 @@ const LogoBox = styled.div`
 const Logo = styled.h1`
   font-size: 2.5rem;
 `;
+
+const NavBox = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    & {
+      padding-left: 17rem;
+    }
+  }
+`;
+
 const NavMenu = styled.nav`
+  /* Web Nav Hover Effect */
+  /* 모바일 버전이랑 다른 효과 주기 위해서 따로 상위에서 효과적용 */
+  & a {
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: 0;
+      left: 50%;
+      margin-top: 10rem;
+      transform: translateX(-50%);
+      width: 0;
+      border-bottom: 0.3rem solid #3f568b;
+      transition: 0.4s;
+    }
+
+    &:hover:after {
+      width: 7 0%;
+    }
+  }
+
   @media (max-width: 800px) {
     & {
       display: none;
@@ -91,7 +133,8 @@ const NavMenu = styled.nav`
 
 const HamMenu = styled.div`
   cursor: pointer;
-  font-size: 3rem;
+  padding-top: 0.2rem;
+  font-size: 3.5rem;
   @media (min-width: 800px) {
     & {
       display: none;
@@ -100,8 +143,10 @@ const HamMenu = styled.div`
 `;
 
 const NavItem = styled.a`
-  padding: 0 2rem;
+  position: relative;
+  padding: 1rem 2rem;
   cursor: pointer;
+
   @media (max-width: 800px) {
     & {
       font-size: 2rem;
@@ -111,7 +156,10 @@ const NavItem = styled.a`
 `;
 
 const MobileNav = styled.div<propsType>`
-  background-color: #333335;
+  /* 모바일 버전일때 햄버거 메뉴 클릭시 나오는 네브바 */
+  /* 다크모드 , 라이트 모드 선택에 따라서 자연스럽게 배경색이 바뀌도록 설정 */
+  background-color: ${(props) =>
+    props.theme === 'light' ? 'var(--color-white-3)' : 'var(--color-dark-2)'};
   display: ${(props) => (props.isDrop ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
