@@ -64,7 +64,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   .slide {
-    animation: 0.3s linear slide;
+    animation: 0.2s linear slide;
   }
   /* header box-shadow 속성 */
   border-radius: 2px;
@@ -105,24 +105,6 @@ const NavBox = styled.div`
 const NavMenu = styled.nav`
   /* Web Nav Hover Effect */
   /* 모바일 버전이랑 다른 효과 주기 위해서 따로 상위에서 효과적용 */
-  & a {
-    &:after {
-      content: '';
-      position: absolute;
-      display: block;
-      bottom: 0;
-      left: 50%;
-      margin-top: 10rem;
-      transform: translateX(-50%);
-      width: 0;
-      border-bottom: 0.3rem solid #3f568b;
-      transition: 0.4s;
-    }
-
-    &:hover:after {
-      width: 7 0%;
-    }
-  }
 
   @media (max-width: 800px) {
     & {
@@ -147,10 +129,33 @@ const NavItem = styled.a`
   padding: 1rem 2rem;
   cursor: pointer;
 
+  & {
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: 0;
+      left: 50%;
+      margin-top: 10rem;
+      transform: translateX(-50%);
+      width: 0;
+      border-bottom: 0.3rem solid #3f568b;
+      transition: 0.4s;
+    }
+
+    &:hover:after {
+      width: 70%;
+    }
+  }
+
   @media (max-width: 800px) {
     & {
       font-size: 2rem;
       padding: 1rem 0;
+    }
+
+    &:hover:after {
+      width: 100%;
     }
   }
 `;
@@ -164,6 +169,7 @@ const MobileNav = styled.div<propsType>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 1rem;
 `;
 
 const IconGrop = styled.div`
