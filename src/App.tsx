@@ -9,7 +9,6 @@ function App() {
     <Container className='App'>
       <Header />
       <ViewMore />
-      <ThemeToggle />
       <Main />
       <Main />
       <Main />
