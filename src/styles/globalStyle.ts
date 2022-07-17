@@ -35,6 +35,9 @@ const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
   }
   html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-snap-type: y;
+    height: 100%;
   }
   * {
     box-sizing: border-box;
