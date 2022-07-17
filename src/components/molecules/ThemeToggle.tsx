@@ -33,6 +33,7 @@ export function ThemeToggle() {
 export default ThemeToggle;
 
 const ToggleContainer = styled.div<Theme>`
+  position: relative;
   font-size: 1.3rem;
   width: 7rem;
   height: 3rem;
