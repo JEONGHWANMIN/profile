@@ -1,4 +1,4 @@
-import { createGlobalStyle, DefaultTheme } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 interface themeType {
@@ -9,6 +9,7 @@ interface themeType {
 
 const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
   ${reset}
+
   :root {
     /* white */
     --color-white-1:#fff; 
@@ -42,32 +43,13 @@ const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
   * {
     box-sizing: border-box;
   }
+  
   body{
     background-color: ${({ theme }) => theme.bgColor};
     color : ${(props) => props.theme.textColor};
-    border-color:  ${({ theme }) => theme.borderColor};;
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    border-color:  ${({ theme }) => theme.borderColor};
   }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  input, button {
-    background-color: transparent;
-    border: none;
-    outline: none;
-  }
-  h1, h2, h3, h4, h5, h6{
-    font-family:'Maven Pro', sans-serif;
-  }
-  ol, ul, li {
-    list-style: none;
-  }
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+
   @keyframes ratate {
     0% {
       transform: rotate(-50deg);

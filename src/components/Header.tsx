@@ -6,31 +6,50 @@ import { themeState } from '../lib/atom/atom';
 import { useEffect, useState } from 'react';
 import { useScreenX } from '../hooks/useScreenX';
 import ThemeToggle from './molecules/ThemeToggle';
+import { useScrollY } from '../hooks/useScrollY';
 
 interface propsType {
   theme: 'light' | 'dark';
   isDrop?: boolean;
+  navFix?: boolean;
 }
 
-const MenuItem = ['Home', 'About', 'Project', 'Award', 'Contact'];
+const MenuItem = [
+  { title: 'Home', position: 1 },
+  { title: 'About', position: 2 },
+  { title: 'Project', position: 3 },
+  { title: 'Award', position: 4 },
+  { title: 'Contact', position: 5 },
+];
 
 function Header() {
   const curTheme = useRecoilValue(themeState);
   const [isDrop, setIsDrop] = useState(false);
-  let { screenX } = useScreenX();
+  const [navFix, setNavFix] = useState(false);
+  const { screenX } = useScreenX();
+  const { scrollY } = useScrollY();
+
   useEffect(() => {
+    console.log('스크롤 와이 :', scrollY);
     if (screenX >= 800) setIsDrop(false);
-  }, [screenX]);
+    if (scrollY >= 83) setNavFix(true);
+    else setNavFix(false);
+  }, [screenX, scrollY]);
+
   return (
     <Container>
-      <HeaderConatiner theme={curTheme}>
+      <HeaderConatiner theme={curTheme} navFix={navFix}>
         <LogoBox>
           <Logo>DevHwan</Logo>
         </LogoBox>
         <NavBox>
           <NavMenu>
             {MenuItem.map((text, i) => {
-              return <NavItem key={i}>{text}</NavItem>;
+              return (
+                <NavItem key={i} theme={curTheme}>
+                  {text.title}
+                </NavItem>
+              );
             })}
           </NavMenu>
           <ThemeToggle />
@@ -49,8 +68,8 @@ function Header() {
       </HeaderConatiner>
       <MobileNav isDrop={isDrop} theme={curTheme} className='slide'>
         {MenuItem.map((text, i) => (
-          <NavItem key={i} className='slide'>
-            {text}
+          <NavItem key={i} className='slide' theme={curTheme}>
+            {text.title}
           </NavItem>
         ))}
       </MobileNav>
@@ -60,18 +79,17 @@ function Header() {
 
 export default Header;
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   .slide {
     animation: 0.2s linear slide;
   }
-  /* header box-shadow 속성 */
-  border-radius: 2px;
-  box-shadow: 0px 1px 10px #999;
 `;
 
-const HeaderConatiner = styled.header<propsType>`
+export const HeaderConatiner = styled.header<propsType>`
+  /* position: fixed; */
+  position: ${(props) => (props.navFix ? 'fixed' : '')};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,33 +97,38 @@ const HeaderConatiner = styled.header<propsType>`
   padding: 0 5rem;
   width: 100%;
   height: 8rem;
+  opacity: 1;
   /* 테마에 따른 헤더 배경 색상  */
+  box-shadow: ${(props) => (props.navFix ? '0px 1px 10px #666;' : '')};
   background-color: ${(props) =>
-    props.theme === 'light' ? 'var(--color-white-2)' : 'var(--color-dark-3);'};
+    props.navFix && props.theme === 'light'
+      ? 'var(--color-white-2)'
+      : props.navFix && props.theme === 'dark'
+      ? 'var(--color-dark-1)'
+      : ''};
 `;
 
-const LogoBox = styled.div`
+export const LogoBox = styled.div`
   cursor: pointer;
 `;
-const Logo = styled.h1`
+
+export const Logo = styled.h1`
   font-size: 2.5rem;
 `;
 
-const NavBox = styled.div`
+export const NavBox = styled.div`
   display: flex;
   align-items: center;
+  font-family: 'Mukta', sans-serif;
 
-  @media (max-width: 800px) {
-    & {
-      padding-left: 17rem;
-    }
+  & {
+    padding-left: 17rem;
   }
 `;
 
-const NavMenu = styled.nav`
+export const NavMenu = styled.nav`
   /* Web Nav Hover Effect */
   /* 모바일 버전이랑 다른 효과 주기 위해서 따로 상위에서 효과적용 */
-
   @media (max-width: 800px) {
     & {
       display: none;
@@ -113,7 +136,7 @@ const NavMenu = styled.nav`
   }
 `;
 
-const HamMenu = styled.div`
+export const HamMenu = styled.div`
   cursor: pointer;
   padding-top: 0.2rem;
   font-size: 3.5rem;
@@ -124,10 +147,14 @@ const HamMenu = styled.div`
   }
 `;
 
-const NavItem = styled.a`
+export const NavItem = styled.a<propsType>`
   position: relative;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   cursor: pointer;
+
+  &:hover {
+    color: ${(props) => (props.theme === 'dark' ? 'yellow' : '#da7805')};
+  }
 
   & {
     &:after {
@@ -139,7 +166,10 @@ const NavItem = styled.a`
       margin-top: 10rem;
       transform: translateX(-50%);
       width: 0;
-      border-bottom: 0.3rem solid #3f568b;
+      border-bottom: 0.3rem solid;
+      border-color: ${(props) =>
+        props.theme === 'dark' ? 'yellow' : '#da7805'};
+
       transition: 0.4s;
     }
 
@@ -160,7 +190,7 @@ const NavItem = styled.a`
   }
 `;
 
-const MobileNav = styled.div<propsType>`
+export const MobileNav = styled.div<propsType>`
   /* 모바일 버전일때 햄버거 메뉴 클릭시 나오는 네브바 */
   /* 다크모드 , 라이트 모드 선택에 따라서 자연스럽게 배경색이 바뀌도록 설정 */
   background-color: ${(props) =>
@@ -172,7 +202,7 @@ const MobileNav = styled.div<propsType>`
   padding-bottom: 1rem;
 `;
 
-const IconGrop = styled.div`
+export const IconGrop = styled.div`
   .rotate {
     animation: 0.3s ease-in-out ratate;
   }

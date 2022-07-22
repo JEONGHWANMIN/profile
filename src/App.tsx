@@ -1,15 +1,13 @@
-import ThemeToggle from './components/molecules/ThemeToggle';
 import Header from './components/Header';
 import ViewMore from './components/molecules/ViewMore';
 import Main from './components/templates/Main';
 import styled from 'styled-components';
-
+import Home from './components/templates/Home';
 function App() {
   return (
     <Container className='App'>
       <Header />
-      <ViewMore />
-      <Main />
+      <Home />
       <Main />
       <Main />
       <Main />

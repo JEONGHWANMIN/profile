@@ -17,6 +17,7 @@ function ViewMore() {
 export default ViewMore;
 
 const ViewContainer = styled.div`
+  /* position: absolute; */
   width: 10rem;
   display: flex;
   align-items: center;
@@ -26,6 +27,7 @@ const ViewContainer = styled.div`
 const IconBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 2rem;
   font-size: 3rem;
 
