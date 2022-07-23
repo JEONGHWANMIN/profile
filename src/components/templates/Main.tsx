@@ -23,9 +23,9 @@ export default Main;
 
 const Container = styled.div<MainProps>`
   height: 100vh;
-  /* border: solid 1px red; */
+  border: solid 1px red;
   background-color: ${(props) =>
-    props.theme === 'light' ? '#538895' : '#071f2e'};
+    props.theme === 'light' ? 'white' : '#071f2e'};
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
 `;
