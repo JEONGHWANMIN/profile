@@ -37,7 +37,7 @@ function Header() {
   }, [screenX, scrollY]);
 
   return (
-    <Container>
+    <Container theme={curTheme} navFix={navFix}>
       <HeaderConatiner theme={curTheme} navFix={navFix}>
         <LogoBox>
           <Logo>DevHwan</Logo>
@@ -52,7 +52,9 @@ function Header() {
               );
             })}
           </NavMenu>
-          <ThemeToggle />
+          <ToggleBox>
+            <ThemeToggle />
+          </ToggleBox>
         </NavBox>
         <HamMenu onClick={() => setIsDrop(!isDrop)}>
           {isDrop ? (
@@ -67,9 +69,9 @@ function Header() {
         </HamMenu>
       </HeaderConatiner>
       <MobileNav isDrop={isDrop} theme={curTheme} className='slide'>
-        {MenuItem.map((text, i) => (
+        {MenuItem.map((menu, i) => (
           <NavItem key={i} className='slide' theme={curTheme}>
-            {text.title}
+            {menu.title}
           </NavItem>
         ))}
       </MobileNav>
@@ -79,33 +81,40 @@ function Header() {
 
 export default Header;
 
-export const Container = styled.div`
+export const Container = styled.div<propsType>`
   display: flex;
+  /* height: 8rem; */
+  padding: 3rem 0rem;
+  width: 100%;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  position: ${(props) => (props.navFix ? 'fixed' : '')};
+  box-shadow: ${(props) => (props.navFix ? '0px 1px 10px #666;' : '')};
+  background-color: ${(props) =>
+    props.navFix && props.theme === 'light'
+      ? 'var(--color-white-1)'
+      : props.navFix && props.theme === 'dark'
+      ? 'var(--color-dark-1)'
+      : ''};
+
+  /* @media (max-width: 800px) {
+    & {
+      align-items: flex-start;
+    }
+  } */
   .slide {
     animation: 0.2s linear slide;
   }
 `;
 
 export const HeaderConatiner = styled.header<propsType>`
-  /* position: fixed; */
-  position: ${(props) => (props.navFix ? 'fixed' : '')};
   display: flex;
+  width: 50%;
   justify-content: space-between;
   align-items: center;
   font-size: 2rem;
-  padding: 0 5rem;
-  width: 100%;
-  height: 8rem;
-  opacity: 1;
-  /* 테마에 따른 헤더 배경 색상  */
-  box-shadow: ${(props) => (props.navFix ? '0px 1px 10px #666;' : '')};
-  background-color: ${(props) =>
-    props.navFix && props.theme === 'light'
-      ? 'var(--color-white-2)'
-      : props.navFix && props.theme === 'dark'
-      ? 'var(--color-dark-1)'
-      : ''};
 `;
 
 export const LogoBox = styled.div`
@@ -120,15 +129,13 @@ export const NavBox = styled.div`
   display: flex;
   align-items: center;
   font-family: 'Mukta', sans-serif;
-
-  & {
-    padding-left: 17rem;
-  }
 `;
 
 export const NavMenu = styled.nav`
+  width: 55rem;
   /* Web Nav Hover Effect */
   /* 모바일 버전이랑 다른 효과 주기 위해서 따로 상위에서 효과적용 */
+  /* border: solid 1px red; */
   @media (max-width: 800px) {
     & {
       display: none;
@@ -151,31 +158,27 @@ export const NavItem = styled.a<propsType>`
   position: relative;
   padding: 0.5rem 2rem;
   cursor: pointer;
-
+  text-transform: uppercase;
   &:hover {
     color: ${(props) => (props.theme === 'dark' ? 'yellow' : '#da7805')};
   }
 
-  & {
-    &:after {
-      content: '';
-      position: absolute;
-      display: block;
-      bottom: 0;
-      left: 50%;
-      margin-top: 10rem;
-      transform: translateX(-50%);
-      width: 0;
-      border-bottom: 0.3rem solid;
-      border-color: ${(props) =>
-        props.theme === 'dark' ? 'yellow' : '#da7805'};
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 50%;
+    margin-top: 10rem;
+    transform: translateX(-50%);
+    width: 0;
+    border-bottom: 0.3rem solid;
+    border-color: ${(props) => (props.theme === 'dark' ? 'yellow' : '#da7805')};
+    transition: 0.4s;
+  }
 
-      transition: 0.4s;
-    }
-
-    &:hover:after {
-      width: 70%;
-    }
+  &:hover:after {
+    width: 70%;
   }
 
   @media (max-width: 800px) {
@@ -193,8 +196,10 @@ export const NavItem = styled.a<propsType>`
 export const MobileNav = styled.div<propsType>`
   /* 모바일 버전일때 햄버거 메뉴 클릭시 나오는 네브바 */
   /* 다크모드 , 라이트 모드 선택에 따라서 자연스럽게 배경색이 바뀌도록 설정 */
-  background-color: ${(props) =>
-    props.theme === 'light' ? 'var(--color-white-3)' : 'var(--color-dark-2)'};
+  /* background-color: ${(props) =>
+    props.theme === 'light'
+      ? 'var(--color-white-3)'
+      : 'var(--color-dark-2)'}; */
   display: ${(props) => (props.isDrop ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
@@ -205,5 +210,14 @@ export const MobileNav = styled.div<propsType>`
 export const IconGrop = styled.div`
   .rotate {
     animation: 0.3s ease-in-out ratate;
+  }
+`;
+
+const ToggleBox = styled.div`
+  margin-left: 2rem;
+  @media (max-width: 800px) {
+    & {
+      margin-bottom: 0.2rem;
+    }
   }
 `;
