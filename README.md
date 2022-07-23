@@ -9,4 +9,4 @@
 
 > Progress
 
-[프로젝트 일지](https://www.notion.so/Profile-932dda61caec4e589f15a946bfc40515)
+[프로젝트 일지](https://checkered-lint-481.notion.site/Profile-932dda61caec4e589f15a946bfc40515)
