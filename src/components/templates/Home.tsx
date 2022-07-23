@@ -2,22 +2,19 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { themeState } from '../../lib/atom/atom';
-import ChangeText from '../molecules/ChangeText';
+import homebg from '../../assets/homebg.png';
 import ViewMore from '../molecules/ViewMore';
-import lightbg from '../../assets/lightbg2.png';
-import darkbg from '../../assets/darkbg33.png';
+import Header from '../Header';
 
 interface HomeProps {
   theme: 'light' | 'string';
   Img?: string;
 }
 
-const words = ['즐기는', '성장하는', '나누는'];
-
 function Home() {
   const curTheme = useRecoilValue(themeState);
   return (
-    <Container theme={curTheme} Img={curTheme === 'dark' ? darkbg : lightbg}>
+    <Container>
       <HomeContainer>
         <TextContainer>
           <TagTextBox>
@@ -30,66 +27,98 @@ function Home() {
           </MainTextBox>
           <MainTextBox>Web Developer</MainTextBox>
         </TextContainer>
+        <ImgContainer>
+          <BgImg src={homebg} alt='Home Coding BackGround' />
+        </ImgContainer>
       </HomeContainer>
+      <ViewBox>
+        <ViewMore />
+      </ViewBox>
     </Container>
   );
 }
 export default Home;
 
-const Container = styled.div<HomeProps>`
-  height: 90vh;
+const Container = styled.div`
   width: 100%;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: end;
-  padding-bottom: 10rem;
-  /* background-color: ${(props) =>
-    props.theme === 'dark' ? 'black' : 'var(--color-white-3)'}; */
-
-  background-image: url(${(props) => props.Img});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  justify-content: center;
 `;
 
 const HomeContainer = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 4rem;
+  width: 60%;
 `;
 
 const TextContainer = styled.div`
   width: 100%;
-  height: 30rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  padding-right: 5rem;
-  background-color: rgba(255, 255, 255, 0.2);
+  padding-left: 20rem;
   @media (max-width: 800px) {
     & {
-      align-items: flex-start;
-      font-size: 6rem;
+      align-items: center;
     }
   }
 `;
 
 const TagTextBox = styled.div<HomeProps>`
   font-size: 2rem;
-  opacity: 75%;
   color: #dc573a;
+  width: 35rem;
+  /* border: solid red 1px; */
   span {
     padding: 0rem 0.5rem;
+  }
+  @media (max-width: 800px) {
+    & {
+      margin-right: 20rem;
+    }
   }
 `;
 const MainTextBox = styled.h1<HomeProps>`
   font-size: 8rem;
+  width: 55rem;
+  /* border: solid 1px red; */
 
   span {
-    opacity: 92%;
     color: ${(props) => (props.theme === 'light' ? '#5d5181' : '#DA7805')};
+  }
+
+  @media (max-width: 1000px) {
+    & {
+      font-size: 7rem;
+    }
+  }
+  @media (max-width: 800px) {
+    & {
+      font-size: 6rem;
+    }
+  }
+`;
+
+const ImgContainer = styled.div`
+  padding-right: 20rem;
+  @media (max-width: 800px) {
+    & {
+      display: none;
+    }
+  }
+`;
+
+const BgImg = styled.img``;
+
+const ViewBox = styled.div`
+  padding-top: 4rem;
+  @media (max-width: 800px) {
+    & {
+      padding-top: 20rem;
+    }
   }
 `;
