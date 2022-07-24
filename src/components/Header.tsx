@@ -30,7 +30,7 @@ function Header() {
   const { scrollY } = useScrollY();
 
   useEffect(() => {
-    console.log('스크롤 와이 :', scrollY);
+    // console.log('스크롤 와이 :', scrollY);
     if (screenX >= 800) setIsDrop(false);
     if (scrollY >= 83) setNavFix(true);
     else setNavFix(false);
@@ -84,6 +84,7 @@ export default Header;
 export const Container = styled.div<propsType>`
   display: flex;
   /* height: 8rem; */
+  transition: all 1s;
   padding: 3rem 0rem;
   width: 100%;
   flex-direction: column;
