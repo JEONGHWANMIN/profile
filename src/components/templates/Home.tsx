@@ -41,11 +41,16 @@ export default Home;
 
 const Container = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 800px) {
+    & {
+      height: 60vh;
+    }
+  }
 `;
 
 const HomeContainer = styled.div`
@@ -54,13 +59,15 @@ const HomeContainer = styled.div`
   justify-content: center;
   margin-top: 4rem;
   width: 60%;
+  /* border: solid 1px blue; */
 `;
 
 const TextContainer = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
   padding-left: 20rem;
+  font-family: 'PT Serif', serif;
   @media (max-width: 800px) {
     & {
       align-items: center;
@@ -83,7 +90,7 @@ const TagTextBox = styled.div<HomeProps>`
   }
 `;
 const MainTextBox = styled.h1<HomeProps>`
-  font-size: 8rem;
+  font-size: 7rem;
   width: 55rem;
   /* border: solid 1px red; */
 
@@ -98,7 +105,7 @@ const MainTextBox = styled.h1<HomeProps>`
   }
   @media (max-width: 800px) {
     & {
-      font-size: 6rem;
+      font-size: 5.3rem;
     }
   }
 `;
