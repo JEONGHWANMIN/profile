@@ -31,8 +31,17 @@ const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
     --color-dark-7:#3b3b3b; 
     --color-dark-8:#444; 
     --color-dark-9:#4c4c4c; 
-
-
+    /* Grey */
+    --color-grey-1:#fafafa; 
+    --color-grey-2:#f5f5f5; 
+    --color-grey-3:#eeeeee;
+    --color-grey-4:#e0e0e0; 
+    --color-grey-5:#bdbdbd; 
+    --color-grey-6:#9e9e9e; 
+    --color-grey-7:#757575; 
+    --color-grey-8:#616161; 
+    --color-grey-9:#424242; 
+    --color-grey-10:#212121; 
   }
   html {
     font-size: 62.5%;
