@@ -4,6 +4,7 @@ import profileImg from '../../assets/profile.jpeg';
 import { ThemeType } from '../../lib/atom/type';
 import { ReactComponent as TistoryLogo } from '../../assets/svg/tistory-logo.svg';
 import { ReactComponent as GithubLogo } from '../../assets/svg/github-logo.svg';
+import Title from '../atoms/Title';
 
 interface PropsType {
   curTheme: ThemeType;
@@ -17,7 +18,7 @@ function About({ curTheme }: PropsType) {
           <Img src={profileImg} />
         </ImgBox>
         <TextBox>
-          <Title>ABOUT ME</Title>
+          <Title title='About Me' />
           <SubTitle curTheme={curTheme}>
             사람들과 소통하는걸 좋아하고 그 과정에서 ,<br></br> 즐겁게 일 할 수
             있는 <span>프런트 엔드</span> 개발자 정환민 입니다. <br></br>
@@ -33,6 +34,9 @@ function About({ curTheme }: PropsType) {
           <AboutContent curTheme={curTheme}>
             <span>PHONE :</span> 010-2640-6795
           </AboutContent>
+          {/* <AboutContent curTheme={curTheme}>
+            <span>YEAR :</span> 2000 / 09 / 04
+          </AboutContent> */}
           <AboutContent curTheme={curTheme}>
             <span>POSITION :</span> Front-End
           </AboutContent>
@@ -96,13 +100,13 @@ const TextBox = styled.div`
   }
 `;
 
-const Title = styled.h1`
-  font-size: 6.5rem;
-  font-family: 'Limelight', cursive;
-  @media (max-width: 800px) {
-    font-size: 5.5rem;
-  }
-`;
+// const Title = styled.h1`
+//   font-size: 6.5rem;
+//   font-family: 'Limelight', cursive;
+//   @media (max-width: 800px) {
+//     font-size: 5.5rem;
+//   }
+// `;
 
 const SubTitle = styled.p<PropsType>`
   font-family: 'Jua', sans-serif;
