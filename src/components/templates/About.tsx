@@ -70,18 +70,14 @@ const Container = styled.div<PropsType>`
 
 const AboutContainer = styled.div`
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   width: 60%;
-  margin-top: 4rem;
-  /* border: solid 1px blue; */
+  margin-top: 8rem;
 `;
 
 const ImgBox = styled.div`
-  width: 40%;
+  width: 50%;
   height: 60rem;
-  padding-right: 20rem;
-  /* border: solid 1px red; */
   @media (max-width: 800px) {
     display: none;
   }
@@ -93,20 +89,11 @@ const Img = styled.img`
 `;
 
 const TextBox = styled.div`
-  padding-left: 15rem;
-  /* border: solid 1px red; */
+  padding-left: 10rem;
   @media (max-width: 800px) {
     padding-left: 0rem;
   }
 `;
-
-// const Title = styled.h1`
-//   font-size: 6.5rem;
-//   font-family: 'Limelight', cursive;
-//   @media (max-width: 800px) {
-//     font-size: 5.5rem;
-//   }
-// `;
 
 const SubTitle = styled.p<PropsType>`
   font-family: 'Jua', sans-serif;
