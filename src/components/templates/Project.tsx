@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import Title from '../atoms/Title';
+import ProjectCard from '../molecules/ProjectCard';
 
 function Project() {
   return (
     <Container>
       <ProjectContainer>
-        <Title>PROJECT</Title>
+        <Title title='Project' />
+
+        <ProjectCard />
       </ProjectContainer>
     </Container>
   );
@@ -17,12 +21,16 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 60vh;
+  height: 100vh;
 `;
 
 const ProjectContainer = styled.div`
-  width: 60%;
+  padding-top: 4rem;
+  width: 70%;
   border: solid 1px red;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
-const Title = styled.h1``;
+const TitleBox = styled.div``;
