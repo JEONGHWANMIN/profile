@@ -42,6 +42,9 @@ const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
     --color-grey-8:#616161; 
     --color-grey-9:#424242; 
     --color-grey-10:#212121; 
+    /* pointColor */
+    --point-color-1: #5d5181;
+    --point-color-2: #DA7805;
   }
   html {
     font-size: 62.5%;
@@ -77,6 +80,18 @@ const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
       opacity: 1;
       transform: translateY(0px);
     }
+  }
+  @keyframes leftInner {
+    0% {
+      opacity: 0.5;
+      transform: translateX(-80px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+    
   }
 `;
 
