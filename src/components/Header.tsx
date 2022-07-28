@@ -30,7 +30,7 @@ function Header() {
   const { scrollY } = useScrollY();
 
   useEffect(() => {
-    // console.log('스크롤 와이 :', scrollY);
+    console.log('스크롤 와이 :', scrollY);
     if (screenX >= 800) setIsDrop(false);
     if (scrollY >= 83) setNavFix(true);
     else setNavFix(false);
@@ -44,13 +44,11 @@ function Header() {
         </LogoBox>
         <NavBox>
           <NavMenu>
-            {MenuItem.map((text, i) => {
-              return (
-                <NavItem key={i} theme={curTheme}>
-                  {text.title}
-                </NavItem>
-              );
-            })}
+            {MenuItem.map((text, i) => (
+              <NavItem key={i} theme={curTheme}>
+                {text.title}
+              </NavItem>
+            ))}
           </NavMenu>
           <ToggleBox>
             <ThemeToggle />
