@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import profileImg from '../../assets/profile.jpeg';
 import { ThemeType } from '../../lib/atom/type';
 import { ReactComponent as TistoryLogo } from '../../assets/svg/tistory-logo.svg';
 import { ReactComponent as GithubLogo } from '../../assets/svg/github-logo.svg';
 import Title from '../atoms/Title';
+import { useScrollY } from '../../hooks/useScrollY';
 
 interface PropsType {
   curTheme: ThemeType;
+  scrollY?: boolean;
 }
 
 function About({ curTheme }: PropsType) {
+  const { scrollY } = useScrollY();
+  useEffect(() => {
+    console.log(typeof scrollY);
+  }, [scrollY]);
   return (
-    <Container curTheme={curTheme}>
+    <Container curTheme={curTheme} scrollY={scrollY > 580}>
       <AboutContainer>
         <ImgBox>
           <Img src={profileImg} />
@@ -35,7 +41,7 @@ function About({ curTheme }: PropsType) {
             <span>PHONE :</span> 010-2640-6795
           </AboutContent>
           {/* <AboutContent curTheme={curTheme}>
-            <span>YEAR :</span> 2000 / 09 / 04
+            <span>YEAR :</span> 1999 / 09 / 04
           </AboutContent> */}
           <AboutContent curTheme={curTheme}>
             <span>POSITION :</span> Front-End
@@ -66,6 +72,7 @@ const Container = styled.div<PropsType>`
   justify-content: center;
   background-color: ${({ curTheme }) =>
     curTheme === 'light' ? 'var(--color-white-1)' : 'var(--color-dark-4)'};
+  /* animation: ${({ scrollY }) => (scrollY ? 'leftInner 1s' : 'null')}; */
 `;
 
 const AboutContainer = styled.div`
@@ -98,7 +105,7 @@ const TextBox = styled.div`
 const SubTitle = styled.p<PropsType>`
   font-family: 'Jua', sans-serif;
   padding-top: 2.5rem;
-  font-size: 1.75rem;
+  font-size: 2rem;
   color: ${({ curTheme }) =>
     curTheme === 'light' ? 'var(--color-grey-9)' : 'var(--color-white-4)'};
   line-height: 2.5rem;
