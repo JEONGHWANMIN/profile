@@ -7,7 +7,6 @@ import { useRecoilValue } from 'recoil';
 import { themeState } from './lib/atom/atom';
 function App() {
   const curTheme = useRecoilValue(themeState);
-  console.log(typeof curTheme);
   return (
     <div>
       <Header />
