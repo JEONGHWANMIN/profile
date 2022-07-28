@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ProjectList } from '../../lib/ProjectList';
 import Title from '../atoms/Title';
 import ProjectCard from '../molecules/ProjectCard';
 
@@ -8,8 +9,17 @@ function Project() {
     <Container>
       <ProjectContainer>
         <Title title='Project' />
-
-        <ProjectCard />
+        {ProjectList.map((project) => (
+          <ProjectCard
+            title={project.title}
+            subtitle={project.subtitle}
+            imgSrc={project.imgSrc}
+            content={project.content}
+            front={project.front}
+            backend={project.backend}
+            deploy={project.deploy}
+          />
+        ))}
       </ProjectContainer>
     </Container>
   );
@@ -21,13 +31,11 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100vh;
 `;
 
 const ProjectContainer = styled.div`
   padding-top: 4rem;
   width: 70%;
-  border: solid 1px red;
   display: flex;
   align-items: center;
   flex-direction: column;
