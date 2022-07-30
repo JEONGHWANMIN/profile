@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { themeState } from '../../lib/atom/atom';
 import homebg from '../../assets/homebg.png';
 import ViewMore from '../molecules/ViewMore';
-import Header from '../Header';
+import Header from '../Organism/Header';
 
 interface HomeProps {
   theme: 'light' | 'string';
@@ -17,7 +17,7 @@ function Home() {
     <Container>
       <HomeContainer>
         <TextContainer>
-          <TagTextBox>
+          <TagTextBox theme={curTheme}>
             <span>#노력하는</span>
             <span>#성장하는</span>
             <span>#즐기는</span>
@@ -77,7 +77,8 @@ const TextContainer = styled.div`
 
 const TagTextBox = styled.div<HomeProps>`
   font-size: 2rem;
-  color: #dc573a;
+  color: ${({ theme }) => (theme === 'light' ? '#dc573a' : 'pink')};
+  font-family: 'Jua', sans-serif;
   width: 35rem;
   /* border: solid red 1px; */
   span {
