@@ -9,10 +9,15 @@ interface Props {
   bgColor?: string;
   textColor?: string;
   fontSize?: number;
+  clickAddress?: string;
 }
 
 function CustomButton(props: Props) {
-  return <Button {...props}>{props.children}</Button>;
+  return (
+    <Button {...props} onClick={() => window.open(props.clickAddress)}>
+      {props.children}
+    </Button>
+  );
 }
 
 export default CustomButton;
