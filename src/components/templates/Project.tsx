@@ -11,6 +11,7 @@ function Project() {
         <Title title='Project' />
         {ProjectList.map((project) => (
           <ProjectCard
+            key={project.id}
             title={project.title}
             subtitle={project.subtitle}
             imgSrc={project.imgSrc}
@@ -18,6 +19,7 @@ function Project() {
             front={project.front}
             backend={project.backend}
             deploy={project.deploy}
+            clickAddress={project.clickAddress}
           />
         ))}
       </ProjectContainer>
