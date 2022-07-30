@@ -4,6 +4,7 @@ import MyPortfoilo from '../assets/MyProfileProject.png';
 // front? , backend? , deploy?
 export const ProjectList = [
   {
+    id: 1,
     title: 'MyProfile',
     subtitle: '22.07.13 ~ 22.08.XX (1인개발)',
     content: `개인 포트폴리오를 만들어 보고 싶어서 시작하게 된 프로젝트 입니다.
@@ -13,9 +14,10 @@ export const ProjectList = [
     생각해 보는 계기가 되었고 , 각종 애니메이션 효과를 좀 더
     찿아보면서 공부하게 되는 계기가 되었던 프로젝트 입니다!`,
     imgSrc: MyPortfoilo,
-    front: 'React , TypeScript , Recoil',
-    backend: '',
-    deploy: 'Vercel',
+    front: ['React', 'TypeScript', 'Recoil'],
+    backend: [],
+    deploy: ['Vercel'],
+    clickAddress: 'https://github.com/JEONGHWANMIN/profile',
   },
 ];
 
