@@ -2,16 +2,18 @@ import styled from 'styled-components';
 import { BsFillPinFill } from 'react-icons/bs';
 import { useRecoilValue } from 'recoil';
 import { themeState } from '../../lib/atom/atom';
-import ProjectImg from '../../assets/MyProfileProject.png';
-import { ReactComponent as GithubLogo } from '../../assets/svg/github-logo.svg';
+import CustomButton from '../atoms/CustomButton';
+import TechTag from '../atoms/TechTag';
+
 interface Props {
   title: string;
   subtitle: string;
   content: string;
   imgSrc: string;
-  front?: string;
-  backend?: string;
-  deploy?: string;
+  front?: string[];
+  backend?: string[];
+  deploy?: string[];
+  clickAddress: string;
 }
 
 interface ThemeProps {
@@ -26,6 +28,7 @@ function ProjectCard({
   front,
   backend,
   deploy,
+  clickAddress,
 }: Props) {
   const curTheme = useRecoilValue(themeState);
 
@@ -46,22 +49,49 @@ function ProjectCard({
             <Border></Border>
             <Skils theme={curTheme}>
               <span>🛠 Project Skill 🛠</span>
-              {front ? (
+              {front !== undefined && front.length > 1 ? (
                 <FrontSkill>
-                  <span>🌈 Front : </span> {front}
+                  <span>🌈 Front </span>
+                  <TechTagBox>
+                    {front.map((item) => (
+                      <TechTag Tag={item} curTheme={curTheme} />
+                    ))}
+                  </TechTagBox>
                 </FrontSkill>
               ) : null}
-              {backend ? (
+              {backend !== undefined && backend.length >= 1 ? (
                 <BackSkill>
-                  <span>📱 Back : </span> {backend}
+                  <span>📱 Back </span>
+                  <TechTagBox>
+                    {backend.map((item) => (
+                      <TechTag Tag={item} curTheme={curTheme} />
+                    ))}
+                  </TechTagBox>
                 </BackSkill>
               ) : null}
-              {deploy ? (
+              {deploy !== undefined && deploy.length >= 1 ? (
                 <Deploy>
-                  <span>🪩 Deploy : </span> {deploy}
+                  <span>🪩 Deploy </span>
+                  <TechTagBox>
+                    {deploy.map((item) => (
+                      <TechTag Tag={item} curTheme={curTheme} />
+                    ))}
+                  </TechTagBox>
                 </Deploy>
               ) : null}
             </Skils>
+            <ButtonBox>
+              <CustomButton
+                clickAddress={clickAddress}
+                bgColor={
+                  curTheme === 'light'
+                    ? 'var(--point-color-1)'
+                    : 'var(--point-color-2)'
+                }
+              >
+                GitHub
+              </CustomButton>
+            </ButtonBox>
           </TextBox>
         </ProjectContent>
       </CardContainer>
@@ -81,7 +111,7 @@ const Container = styled.div<ThemeProps>`
   border-radius: 2rem;
   padding: 2rem;
   background-color: ${({ theme }) =>
-    theme === 'light' ? ' var(--color-white-1)' : 'var(--color-dark-8)'};
+    theme === 'light' ? ' var(--color-white-1)' : 'var(--color-dark-5)'};
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
@@ -118,15 +148,25 @@ const ProjectContent = styled.div`
   display: flex;
   width: 100%;
   padding-top: 2rem;
+  @media (max-width: 800px) {
+    & {
+      flex-direction: column;
+      align-items: center;
+      width: 200%;
+    }
+  }
 `;
 
 const ImgBox = styled.div`
   width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
     overflow: hidden;
     border-radius: 2rem;
-    width: 100%;
-    height: 100%;
+    width: 50rem;
+    height: 42rem;
   }
 `;
 
@@ -137,7 +177,7 @@ const TextBox = styled.div`
   /* border: solid 1px blue; */
 `;
 
-const Content = styled.h2`
+const Content = styled.h1`
   font-size: 1.7rem;
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 2.7rem;
@@ -150,13 +190,7 @@ const Border = styled.div`
   background-color: lightgray;
 `;
 
-const GitHubIcon = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 2rem;
-`;
-
-const Skils = styled.h2<ThemeProps>`
+const Skils = styled.div<ThemeProps>`
   padding: 1rem;
   border-radius: 1rem;
   line-height: 3.5rem;
@@ -173,6 +207,10 @@ const Skils = styled.h2<ThemeProps>`
   }
 `;
 
+const TechTagBox = styled.div`
+  display: flex;
+`;
+
 const FrontSkill = styled.h2`
   font-size: 2rem;
 `;
@@ -183,4 +221,9 @@ const BackSkill = styled.h2`
 
 const Deploy = styled.h2`
   font-size: 2rem;
+`;
+
+const ButtonBox = styled.div`
+  margin-left: 1.5rem;
+  margin-bottom: 2rem;
 `;
