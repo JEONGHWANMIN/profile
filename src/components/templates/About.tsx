@@ -6,17 +6,21 @@ import { ReactComponent as TistoryLogo } from '../../assets/svg/tistory-logo.svg
 import { ReactComponent as GithubLogo } from '../../assets/svg/github-logo.svg';
 import Title from '../atoms/Title';
 import { useScrollY } from '../../hooks/useScrollY';
+import { themeState } from '../../lib/atom/atom';
+import { useRecoilValue } from 'recoil';
 
 interface PropsType {
   curTheme: ThemeType;
   scrollY?: boolean;
 }
 
-function About({ curTheme }: PropsType) {
+function About() {
   const { scrollY } = useScrollY();
+  const curTheme = useRecoilValue(themeState);
   useEffect(() => {
     console.log(typeof scrollY);
   }, [scrollY]);
+
   return (
     <Container curTheme={curTheme} scrollY={scrollY > 580}>
       <AboutContainer>
@@ -103,6 +107,7 @@ const TextBox = styled.div`
 `;
 
 const SubTitle = styled.p<PropsType>`
+  width: 50rem;
   font-family: 'Jua', sans-serif;
   padding-top: 2.5rem;
   font-size: 2rem;
@@ -111,7 +116,8 @@ const SubTitle = styled.p<PropsType>`
   line-height: 2.5rem;
   word-spacing: 0.2rem;
   @media (max-width: 800px) {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
+    width: 120%;
   }
 `;
 
