@@ -53,8 +53,8 @@ function ProjectCard({
                 <FrontSkill>
                   <span>🌈 Front </span>
                   <TechTagBox>
-                    {front.map((item) => (
-                      <TechTag Tag={item} curTheme={curTheme} />
+                    {front.map((item, idx) => (
+                      <TechTag Tag={item} curTheme={curTheme} key={idx} />
                     ))}
                   </TechTagBox>
                 </FrontSkill>
@@ -63,8 +63,8 @@ function ProjectCard({
                 <BackSkill>
                   <span>📱 Back </span>
                   <TechTagBox>
-                    {backend.map((item) => (
-                      <TechTag Tag={item} curTheme={curTheme} />
+                    {backend.map((item, idx) => (
+                      <TechTag Tag={item} curTheme={curTheme} key={idx} />
                     ))}
                   </TechTagBox>
                 </BackSkill>
@@ -73,8 +73,8 @@ function ProjectCard({
                 <Deploy>
                   <span>🪩 Deploy </span>
                   <TechTagBox>
-                    {deploy.map((item) => (
-                      <TechTag Tag={item} curTheme={curTheme} />
+                    {deploy.map((item, idx) => (
+                      <TechTag Tag={item} curTheme={curTheme} key={idx} />
                     ))}
                   </TechTagBox>
                 </Deploy>
@@ -133,13 +133,13 @@ const CardContainer = styled.div`
 `;
 
 const ProjectTitle = styled.h1`
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-family: 'Black Han Sans', sans-serif;
 `;
 
 const ProjectSubTitle = styled.h2<ThemeProps>`
   padding-top: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: ${({ theme }) =>
     theme === 'light' ? 'var(--color-grey-8)' : 'var(--color-white-1)'};
 `;
@@ -178,7 +178,7 @@ const TextBox = styled.div`
 `;
 
 const Content = styled.h1`
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 2.7rem;
 `;
@@ -209,6 +209,7 @@ const Skils = styled.div<ThemeProps>`
 
 const TechTagBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const FrontSkill = styled.h2`
