@@ -22,7 +22,9 @@ function Footer() {
           onClick={() => window.open('https://ghksals0904.tistory.com')}
         />
       </IconBox>
-      <CopyRightText>ⓒ 2022 Jeong Hwan Min. All rights reversed</CopyRightText>
+      <CopyRightText>
+        ⓒ 2022 By Jeong Hwan Min. All rights reversed
+      </CopyRightText>
     </Container>
   );
 }
@@ -30,7 +32,7 @@ function Footer() {
 export default Footer;
 
 const Container = styled.div<Props>`
-  height: 15vh;
+  height: 20vh;
   background-color: ${({ theme }) =>
     theme === 'light' ? 'var(--color-grey-1)' : 'var(--color-dark-5)'};
   /* #f8f9fa */
