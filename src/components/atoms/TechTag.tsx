@@ -30,7 +30,7 @@ const Container = styled.div<Props>`
 `;
 
 const TagTitle = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
 `;
