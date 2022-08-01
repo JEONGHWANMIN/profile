@@ -19,7 +19,7 @@ const MenuItem = [
   { title: 'Home', move: () => window.scroll(0, 0) },
   { title: 'About', move: () => window.scroll(0, 630) },
   { title: 'Project', move: () => window.scroll(0, 1300) },
-  { title: 'Award', move: () => window.scroll(0, 0) },
+  { title: 'Spec', move: () => window.scroll(0, 2200) },
   { title: 'Contact', move: () => window.scroll(0, 0) },
 ];
 
