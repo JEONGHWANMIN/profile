@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import profileImg from '../../assets/profile.jpeg';
+import profileImg from '../../assets/profile2.jpeg';
 import { ThemeType } from '../../lib/atom/type';
 import { ReactComponent as TistoryLogo } from '../../assets/svg/tistory-logo.svg';
 import { ReactComponent as GithubLogo } from '../../assets/svg/github-logo.svg';
@@ -72,6 +72,7 @@ const Container = styled.div<PropsType>`
   display: flex;
   flex-direction: column;
   width: 100%;
+
   align-items: center;
   justify-content: center;
   background-color: ${({ curTheme }) =>
