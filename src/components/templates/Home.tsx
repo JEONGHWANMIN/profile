@@ -41,7 +41,7 @@ export default Home;
 
 const Container = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,7 +123,7 @@ const ImgContainer = styled.div`
 const BgImg = styled.img``;
 
 const ViewBox = styled.div`
-  padding-top: 4rem;
+  padding-top: 15rem;
   @media (max-width: 800px) {
     & {
       padding-top: 20rem;
