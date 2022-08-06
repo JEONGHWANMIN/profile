@@ -52,6 +52,11 @@ const SpecContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 800px) {
+    & {
+      width: 115%;
+    }
+  }
 `;
 
 const AwardsBox = styled.div`
