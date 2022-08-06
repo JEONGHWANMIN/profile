@@ -41,6 +41,9 @@ const ProjectContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 800px) {
+    & {
+      width: 90%;
+    }
+  }
 `;
-
-const TitleBox = styled.div``;
