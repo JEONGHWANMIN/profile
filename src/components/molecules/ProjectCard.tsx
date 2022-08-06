@@ -162,6 +162,11 @@ const ImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 800px) {
+    & {
+      width: 53%;
+    }
+  }
   img {
     overflow: hidden;
     border-radius: 2rem;
@@ -174,7 +179,12 @@ const TextBox = styled.div`
   width: 50%;
   margin-left: 3.5rem;
   align-items: center;
-  /* border: solid 1px blue; */
+  @media (max-width: 800px) {
+    & {
+      width: 55%;
+      padding-right: 2rem;
+    }
+  }
 `;
 
 const Content = styled.h1`
@@ -195,7 +205,6 @@ const Skils = styled.div<ThemeProps>`
   border-radius: 1rem;
   line-height: 3.5rem;
   font-size: 2rem;
-
   & > span {
     font-size: 2rem;
     color: ${({ theme }) =>
