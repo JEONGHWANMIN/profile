@@ -49,6 +49,11 @@ const Container = styled.div`
   border-radius: 2rem;
   padding: 2rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  @media (max-width: 800px) {
+    & {
+      flex-direction: column;
+    }
+  }
 `;
 
 const AwardIconBox = styled.div`
@@ -74,6 +79,11 @@ const AwardIconBorder = styled.div<ThemeProps>`
 `;
 const AwardContents = styled.div`
   flex: 9;
+  @media (max-width: 800px) {
+    & {
+      flex: 10;
+    }
+  }
 `;
 
 const AwardPeriod = styled.h2<ThemeProps>`
