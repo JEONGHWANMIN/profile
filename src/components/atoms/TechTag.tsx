@@ -25,7 +25,7 @@ const Container = styled.div<Props>`
   background-color: ${({ theme }) =>
     theme === 'light' ? '#8181b0' : '#f18763'};
   border-radius: 0.5rem;
-  margin: 0rem 0.2rem;
+  margin: 0.1rem 0.2rem;
   padding: 1.3rem 1rem;
 `;
 
