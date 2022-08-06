@@ -60,6 +60,7 @@ const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
     background-color: ${({ theme }) => theme.bgColor};
     color : ${(props) => props.theme.textColor};
     border-color:  ${({ theme }) => theme.borderColor};
+    overflow-x: hidden;
   }
 
   @keyframes ratate {
