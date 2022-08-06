@@ -77,7 +77,8 @@ const TextContainer = styled.div`
 
 const TagTextBox = styled.div<HomeProps>`
   font-size: 2rem;
-  color: ${({ theme }) => (theme === 'light' ? '#dc573a' : 'pink')};
+  color: ${({ theme }) =>
+    theme === 'light' ? 'var(--point-color-2)' : 'pink'};
   font-family: 'Jua', sans-serif;
   width: 35rem;
   /* border: solid red 1px; */
