@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useScreenX } from '../../hooks/useScreenX';
 import ThemeToggle from '../molecules/ThemeToggle';
 import { useScrollY } from '../../hooks/useScrollY';
-
+import { ReactComponent as BulbLogo } from '../../assets/svg/bulb.svg';
 interface propsType {
   theme: 'light' | 'dark';
   isDrop?: boolean;
@@ -16,11 +16,31 @@ interface propsType {
 }
 
 const MenuItem = [
-  { title: 'Home', move: () => window.scroll(0, 0) },
-  { title: 'About', move: () => window.scroll(0, 630) },
-  { title: 'Project', move: () => window.scroll(0, 1300) },
-  { title: 'Spec', move: () => window.scroll(0, 2200) },
-  { title: 'Contact', move: () => window.scroll(0, 0) },
+  {
+    title: 'Home',
+    move: () => window.scroll(0, 0),
+    mobile: () => window.scroll(0, 0),
+  },
+  {
+    title: 'About',
+    move: () => window.scroll(0, 1000),
+    mobile: () => window.scroll(0, 450),
+  },
+  {
+    title: 'Project',
+    move: () => window.scroll(0, 1700),
+    mobile: () => window.scroll(0, 950),
+  },
+  {
+    title: 'Spec',
+    move: () => window.scroll(0, 2550),
+    mobile: () => window.scroll(0, 2250),
+  },
+  {
+    title: 'Contact',
+    move: () => window.scroll(0, 10000),
+    mobile: () => window.scroll(0, 10000),
+  },
 ];
 
 function Header() {
@@ -30,11 +50,6 @@ function Header() {
   const { screenX } = useScreenX();
   const { scrollY } = useScrollY();
 
-  function test() {
-    if (scrollY < 630) {
-      return 'HOME';
-    }
-  }
   useEffect(() => {
     console.log('스크롤 와이 :', scrollY);
     if (screenX >= 800) setIsDrop(false);
@@ -45,25 +60,25 @@ function Header() {
   return (
     <Container theme={curTheme} navFix={navFix}>
       <HeaderConatiner theme={curTheme} navFix={navFix}>
-        <LogoBox>
-          <Logo>DevHwan</Logo>
+        <LogoBox theme={curTheme}>
+          <Logo>
+            Dev<span>Hwan</span>
+            <LogoSvg>
+              <BulbLogo width={50} height={50} />
+            </LogoSvg>
+          </Logo>
         </LogoBox>
         <NavBox>
           <NavMenu>
             {MenuItem.map((text, i) => (
-              <NavItem
-                key={i}
-                theme={curTheme}
-                scrollY={test()}
-                onClick={() => text.move()}
-              >
+              <NavItem key={i} theme={curTheme} onClick={() => text.move()}>
                 {text.title}
               </NavItem>
             ))}
+            <ToggleBox>
+              <ThemeToggle />
+            </ToggleBox>
           </NavMenu>
-          <ToggleBox>
-            <ThemeToggle />
-          </ToggleBox>
         </NavBox>
         <HamMenu onClick={() => setIsDrop(!isDrop)}>
           {isDrop ? (
@@ -77,12 +92,21 @@ function Header() {
           )}
         </HamMenu>
       </HeaderConatiner>
+
       <MobileNav isDrop={isDrop} theme={curTheme} className='slide'>
         {MenuItem.map((menu, i) => (
-          <NavItem key={i} className='slide' theme={curTheme}>
+          <NavItem
+            key={i}
+            className='slide'
+            theme={curTheme}
+            onClick={menu.mobile}
+          >
             {menu.title}
           </NavItem>
         ))}
+        <ToggleBox>
+          <ThemeToggle />
+        </ToggleBox>
       </MobileNav>
     </Container>
   );
@@ -92,7 +116,6 @@ export default Header;
 
 export const Container = styled.div<propsType>`
   display: flex;
-  /* height: 8rem; */
   transition: all 1s;
   padding: 3rem 0rem;
   width: 100%;
@@ -109,19 +132,19 @@ export const Container = styled.div<propsType>`
       ? 'var(--color-dark-1)'
       : ''};
 
-  /* @media (max-width: 800px) {
-    & {
-      align-items: flex-start;
-    }
-  } */
   .slide {
     animation: 0.2s linear slide;
+  }
+  @media (max-width: 800px) {
+    & {
+      padding: 1.5rem 0rem;
+    }
   }
 `;
 
 export const HeaderConatiner = styled.header<propsType>`
   display: flex;
-  width: 50%;
+  width: 70%;
   justify-content: space-between;
   align-items: center;
   font-size: 2rem;
@@ -131,8 +154,27 @@ export const LogoBox = styled.div`
   cursor: pointer;
 `;
 
-export const Logo = styled.h1`
+export const Logo = styled.h1<propsType>`
+  position: relative;
   font-size: 2.5rem;
+  font-weight: bold;
+  span {
+    color: ${(props) =>
+      props.theme === 'light'
+        ? 'var(--point-color-1)'
+        : 'var(--point-color-2)'};
+  }
+`;
+
+const LogoSvg = styled.div`
+  position: absolute;
+  margin-left: 97px;
+  top: -30px;
+  @media (max-width: 800px) {
+    & {
+      top: -25px;
+    }
+  }
 `;
 
 export const NavBox = styled.div`
@@ -143,6 +185,7 @@ export const NavBox = styled.div`
 
 export const NavMenu = styled.nav`
   width: 55rem;
+  display: flex;
   /* Web Nav Hover Effect */
   /* 모바일 버전이랑 다른 효과 주기 위해서 따로 상위에서 효과적용 */
   /* border: solid 1px red; */
@@ -206,15 +249,11 @@ export const NavItem = styled.a<propsType>`
 export const MobileNav = styled.div<propsType>`
   /* 모바일 버전일때 햄버거 메뉴 클릭시 나오는 네브바 */
   /* 다크모드 , 라이트 모드 선택에 따라서 자연스럽게 배경색이 바뀌도록 설정 */
-  /* background-color: ${(props) =>
-    props.theme === 'light'
-      ? 'var(--color-white-3)'
-      : 'var(--color-dark-2)'}; */
+  padding-top: 1rem;
   display: ${(props) => (props.isDrop ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 1rem;
 `;
 
 export const IconGrop = styled.div`
@@ -224,7 +263,7 @@ export const IconGrop = styled.div`
 `;
 
 const ToggleBox = styled.div`
-  margin-left: 2rem;
+  margin-top: 0.4rem;
   @media (max-width: 800px) {
     & {
       margin-bottom: 0.2rem;
