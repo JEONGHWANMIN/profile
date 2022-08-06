@@ -60,6 +60,11 @@ const ContactContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  @media (max-width: 800px) {
+    & {
+      flex-direction: column;
+    }
+  }
 `;
 
 const TitleBox = styled.div`
@@ -87,6 +92,11 @@ const CircleBox = styled.div<Props>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 800px) {
+    & {
+      margin-bottom: 1rem;
+    }
+  }
 `;
 
 const ContactTitle = styled.h1`
